@@ -14,10 +14,12 @@
 				"EditorConfig.EditorConfig",
 				"dbaeumer.vscode-eslint",
 				"tamasfe.even-better-toml",
-				"rust-lang.rust-analyzer"
+				"rust-lang.rust-analyzer",
+				"GitHub.copilot",
+				"GitHub.copilot-chat"
 			]
 		}
-	}
+	},
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
@@ -26,11 +28,11 @@
 	// "forwardPorts": [],
 
 	// Uncomment the next line to run commands after the container is created.
-	// "postCreateCommand": "cat /etc/os-release",
+	"postCreateCommand": "cat /etc/os-release",
 
 	// Configure tool-specific properties.
 	// "customizations": {},
 
 	// Uncomment to connect as an existing user other than the container default. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "devcontainer"
+	"remoteUser": "root"
 }
