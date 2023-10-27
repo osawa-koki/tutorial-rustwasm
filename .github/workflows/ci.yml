@@ -1,0 +1,23 @@
+name: ci
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - develop
+      - issues/*
+  pull_request:
+    branches:
+      - main
+      - develop
+      - issues/*
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Test with docker
+      run: docker build -t my-image -f Dockerfile.test .
