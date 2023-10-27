@@ -15,7 +15,6 @@ COPY ./ ./
 # tests (rust)
 RUN wasm-pack test --chrome --headless
 RUN wasm-pack test --firefox --headless
-RUN wasm-pack test --safari --headless
 
 WORKDIR /src/www/
 RUN npm install
