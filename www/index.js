@@ -1,8 +1,6 @@
 import { Universe, Cell } from "tutorial-rustwasm";
 import { memory } from "tutorial-rustwasm/tutorial_rustwasm_bg";
 
-const pre = document.getElementById("game-of-life-canvas");
-
 const CELL_SIZE = 5; // px
 const GRID_COLOR = "#CCCCCC";
 const DEAD_COLOR = "#FFFFFF";
