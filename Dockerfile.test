@@ -13,6 +13,7 @@ RUN apt update && apt install nodejs -y
 COPY ./ ./
 
 # tests (rust)
+RUN wasm-pack build
 RUN wasm-pack test --chrome --headless
 RUN wasm-pack test --firefox --headless
 
