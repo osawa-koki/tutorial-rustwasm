@@ -2,14 +2,14 @@ mod utils;
 
 use wasm_bindgen::prelude::*;
 
-extern crate web_sys;
+// extern crate web_sys;
 
-// A macro to provide `println!(..)`-style syntax for `console.log` logging.
-macro_rules! log {
-    ( $( $t:tt )* ) => {
-        web_sys::console::log_1(&format!( $( $t )* ).into());
-    }
-}
+// // A macro to provide `println!(..)`-style syntax for `console.log` logging.
+// macro_rules! log {
+//     ( $( $t:tt )* ) => {
+//         web_sys::console::log_1(&format!( $( $t )* ).into());
+//     }
+// }
 
 // 各セルの状態を表す列挙型。
 // 全てのセルの値の和が「生きているセルの数」になる。
@@ -19,6 +19,15 @@ macro_rules! log {
 pub enum Cell {
     Dead = 0,
     Alive = 1,
+}
+
+impl Cell {
+    fn toggle(&mut self) {
+        *self = match *self {
+            Cell::Dead => Cell::Alive,
+            Cell::Alive => Cell::Dead,
+        };
+    }
 }
 
 // ユニバースの状態を表す構造体。
@@ -98,13 +107,13 @@ impl Universe {
                 let cell = self.cells[idx];
                 let live_neighbors = self.live_neighbor_count(row, col);
 
-                log!(
-                    "cell[{}, {}] is initially {:?} and has {} live neighbors",
-                    row,
-                    col,
-                    cell,
-                    live_neighbors
-                );
+                // log!(
+                //     "cell[{}, {}] is initially {:?} and has {} live neighbors",
+                //     row,
+                //     col,
+                //     cell,
+                //     live_neighbors
+                // );
 
                 let next_cell = match (cell, live_neighbors) {
                     // Rule 1: Any live cell with fewer than two live neighbours
@@ -123,13 +132,18 @@ impl Universe {
                     (otherwise, _) => otherwise,
                 };
 
-                log!("    it becomes {:?}", next_cell);
+                // log!("    it becomes {:?}", next_cell);
 
                 next[idx] = next_cell;
             }
         }
 
         self.cells = next;
+    }
+
+    pub fn toggle_cell(&mut self, row: u32, column: u32) {
+        let idx = self.get_index(row, column);
+        self.cells[idx].toggle();
     }
 
     // ##### テスト用のメソッド #####
